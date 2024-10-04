@@ -1,18 +1,28 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 
 const schema = a.schema({
-  quiz: a
+  Question: a
     .model({
-      roundOne: a.string().array(),
-      roundTwo: a.string().array(),
-      roundThree: a.string().array(),
-      roundFour: a.string().array(),
-      roundFive: a.string().array(),
-      roundSix: a.string().array(),
-      roundSeven: a.string().array(),
-      roundEight: a.string().array(),
-      roundNine: a.string().array(),
-      roundTen: a.string().array(),
+      id: a.id(),
+      category: a.string().required(),
+      correctAnswer: a.string().required(),
+      incorrectAnswers: a.string().array().required(),
+      question: a.string().required(),
+      tags: a.string().array(),
+      type: a.enum(["boolean", "multiple"]),
+      difficulty: a.enum(["easy", "medium", "hard"]),
+      regions: a.string().array(),
+      isNiche: a.boolean().default(false),
+      quizId: a.id().required(),
+      quiz: a.belongsTo("Quiz", "quizId"),
+    })
+    .authorization((allow) => [allow.owner()]),
+
+  Quiz: a
+    .model({
+      id: a.id().required(),
+      title: a.string().required(),
+      questions: a.hasMany("Question", "quizId"),
     })
     .authorization((allow) => [allow.owner()]),
 });

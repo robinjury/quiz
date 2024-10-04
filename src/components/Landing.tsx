@@ -9,11 +9,13 @@ export function Landing() {
       </h1>
       <h2 className="text-center m-8">Click below to find quizes</h2>
       <Link to={"/home"}>
-        <Image
-          className="flex items-center"
-          alt="Quiz logo"
-          src="https://viralsolutions.net/wp-content/uploads/2019/06/shutterstock_749036344.jpg"
-        />
+        <div className="flex justify-center">
+          <Image
+            className=""
+            alt="Quiz logo"
+            src="https://viralsolutions.net/wp-content/uploads/2019/06/shutterstock_749036344.jpg"
+          />
+        </div>
       </Link>
     </div>
   );
